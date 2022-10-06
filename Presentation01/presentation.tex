@@ -32,7 +32,7 @@
 \usepackage{natbib}
 \usecolortheme{seahorse}
 
-\title{Leisure-Enhancing Technological Change  \\ \small{Applied Macroeconomics: Micro data for Macro Models} }
+\title{Leisure-Enhancing Technological Change  \\ \small{Applied Macroeconomics: Micro Data for Macro Models} }
 \author{Author: Łukasz Rachel \\ 
 Presented by: Jose M. Quintero}
 
@@ -53,28 +53,139 @@ Presented by: Jose M. Quintero}
   \titlepage
 \end{frame}
 
-\begin{frame}{Motivation}
+\begin{frame}{Motivation}\label{p1:Int}
+\begin{itemize}
+    \item Incorporating  Leisure Enhancing Technology (LET) into traditional growth theory post certain puzzles \hyperlink{p1:Mot}{\beamerbutton{Trends}}
+    \begin{enumerate}
+        \item How do we distinguish between labor enhancing technology and ``traditional'' product technology?
+        \item What are the effects of labor enhancing technology on macroecnomic variables? 
+    \end{enumerate}
+    \item This paper reconcile two strings of literature
+    \begin{enumerate}
+        \item Endogenous growth innovation: \textcolor{red}{Constant hours of work along the BGP}.  
+        \item Steady long run decline in hours worked: \textcolor{red}{Exogenous growth}.
+    \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{This Paper}
+\begin{itemize}
+    \item Build an endogenous growth model
+    \begin{enumerate}
+        \item Consumption product innovation + \textcolor{blue}{Leisure product innovation}
+        \item \textcolor{blue}{Non-rival LET with zero price.} 
+        \item Branding investment for ``traditional'' consumption goods.
+        \item Intermediate platforms mediating between leisure technologies and branding.   
+    \end{enumerate}
+    \item Compare the BGP trends of the model to long run trends. 
+    \item Characterize the preference that can hold a BGP with LET. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Main Results}
+\begin{enumerate}
+    \item Endogenous growth model such that over the BGP:
+    \begin{itemize}
+        \item Decreasing hours of work
+        \item Decreasing TFP growth 
+    \end{itemize}
+    \item Fit long run trends observed in the data (qualitative).  
+\end{enumerate}
     
 \end{frame}
 
+\section{The Model}
+
 \begin{frame}{Model Overview}
+\begin{itemize}
+    \item Representative household preferences over consumption and leisure
+    \begin{enumerate}
+        \item Final good consumption
+        \item \textcolor{blue}{Bundle of LET with zero price}. CES aggregator. 
+    \end{enumerate}
+    \item Final good competitive market
+    \begin{enumerate}
+        \item Inputs from monopolist intermediates. 
+        \item Growing mass of intermediate sectors. 
+        \item \textcolor{blue}{Demand shift of intermediate inputs from branding}. 
+    \end{enumerate}
+    \item Intermediate inputs with monopolistic competition. 
+    \begin{enumerate}
+        \item One-to-one technology using capital. 
+        \item \textcolor{blue}{Investing in branding units}.
+    \end{enumerate}
+    \pause 
+    \item \textcolor{teal}{LET platforms}
+    \begin{enumerate}
+        \item \textcolor{teal}{Provide LET to consumers for free}.
+        \item \textcolor{teal}{Use branding units to cover expenses}.
+        \item Copycat product that force to break even. 
+    \end{enumerate}
+\end{itemize}
     
 \end{frame}
 
 \begin{frame}{Exogenous Growth}
-    
+    \begin{figure}
+        \centering
+        \includegraphics[width = \textwidth]{Presentation01/Figures/Mod1.pdf}
+        \caption{Model Overview}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Taking Stock}
-    
+\begin{itemize}
+    \item On a BGP the growth rates are \\ \vspace{0.5cm}
+    \begin{table}[htb]
+        \centering
+        \begin{tabular}{lcc} \hline
+             Object & Growth & Type \\
+             \hline\hline
+             $N(t)$ & $n$ & Exogenous \\ 
+             $M(t)$ & $\gamma_M$ & Exogenous \\ 
+             $h(t)$ & $\textcolor{blue}{-\zeta \gamma_M}$ & Endogenous \\ 
+             $A(t)$ & $\dfrac{n\textcolor{blue}{-\zeta\gamma_M}}{1-\phi}$ & Endogenous \\ 
+             $c(t)$ &  $\dfrac{n\textcolor{blue}{-\zeta\gamma_M}}{1-\phi}$ & Endogenous \\ 
+             \hline\hline
+        \end{tabular}
+        \caption{Growth Rates}
+    \end{table}
+    \item Welfare? Ambiguous. Utility from leisure vs. consumption. 
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Endogenous Leisure Technology}
-    
+    \begin{figure}
+        \centering
+        \includegraphics[width = \textwidth]{Presentation01/Figures/Mod2.pdf}
+        \caption{Model Overview}
+    \end{figure}
 \end{frame}
 
+\section{Results}
+
 \begin{frame}{Taking the Model to the Data}
-    
+\begin{figure}
+    \centering    
+    \includegraphics[width=\textwidth]{Presentation01/Figures/ModTrends.png}
+\end{figure}  
+\end{frame}
+
+\begin{frame}
+\begin{center}    
+    \Huge{Thank You}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}{Motivational Trends}\label{p1:Mot}
+    \begin{figure}
+    \centering    
+    \includegraphics[width=\textwidth]{Presentation01/Figures/MotFacts.png}
+\end{figure}
+\hyperlink{p1:Int}{\beamerbutton{Back}}
+
 \end{frame}
 
 
