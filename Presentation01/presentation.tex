@@ -1,4 +1,4 @@
-\documentclass[usenames,dvipsnames]{beamer}
+\documentclass[usenames,dvipsnames,aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage{xfrac}
 \usepackage{amsmath}
@@ -46,6 +46,15 @@ Presented by: Jose M. Quintero}
   \end{frame}
 }
 
+\AtBeginSubsection[]
+{
+   \begin{frame}
+        \frametitle{Outline}
+        \tableofcontents[currentsubsection]
+   \end{frame}
+}
+
+
 
 \begin{document}
 
@@ -55,44 +64,45 @@ Presented by: Jose M. Quintero}
 
 \begin{frame}{Motivation}\label{p1:Int}
 \begin{itemize}
-    \item Incorporating  Leisure Enhancing Technology (LET) into traditional growth theory post certain puzzles \hyperlink{p1:Mot}{\beamerbutton{Trends}}
+    \item Leisure Enhancing Technologies (LET) have become increasingly relevant, and they differ from traditional products in the sense that \hyperlink{p1:Mot}{\beamerbutton{Trends}}
     \begin{enumerate}
-        \item How do we distinguish between labor enhancing technology and ``traditional'' product technology?
-        \item What are the effects of labor enhancing technology on macroecnomic variables? 
+        \item Are non-rival,
+        \item Can be indirectly monetized. 
     \end{enumerate}
-    \item This paper reconcile two strings of literature
+    \pause
+    \item There is no clear distinction in the growth theory from traditional consumption 
     \begin{enumerate}
-        \item Endogenous growth innovation: \textcolor{red}{Constant hours of work along the BGP}.  
-        \item Steady long run decline in hours worked: \textcolor{red}{Exogenous growth}.
+        \item How do we distinguish between LET and ``traditional'' product technology?
+        \item What are the effects of LET on macroeconomic variables? 
+    \end{enumerate}
+    \pause 
+    \item This paper reconciles two macroeconomic facts 
+    \begin{enumerate}
+        \item Endogenous growth models: \textcolor{red}{Constant hours of work along the BGP}.  
+        \item Steady long-run decline in hours worked: \textcolor{red}{Exogenous growth}.
     \end{enumerate}
 \end{itemize}
 \end{frame}
 
 \begin{frame}{This Paper}
 \begin{itemize}
-    \item Build an endogenous growth model
+    \item Build a (semi) endogenous growth model
     \begin{enumerate}
-        \item Consumption product innovation + \textcolor{blue}{Leisure product innovation}
-        \item \textcolor{blue}{Non-rival LET with zero price.} 
-        \item Branding investment for ``traditional'' consumption goods.
-        \item Intermediate platforms mediating between leisure technologies and branding.   
+        \item Consumption products + \textcolor{blue}{Leisure products}
+        \item \textcolor{blue}{Leisure products are non-rival.} 
+        \item Consumption goods can \textcolor{blue}{shift the demand by branding}. 
+        \item \textcolor{blue}{Leisure products can be monetized through branding}.   
     \end{enumerate}
-    \item Compare the BGP trends of the model to long run trends. 
+    \pause 
+    \item Compare the BGP and transition of the model to long-run trends. 
+    \begin{enumerate}
+        \item Declining TFP 
+        \item Steady decrease in hours worked. 
+    \end{enumerate}
     \item Characterize the preference that can hold a BGP with LET. 
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Main Results}
-\begin{enumerate}
-    \item Endogenous growth model such that over the BGP:
-    \begin{itemize}
-        \item Decreasing hours of work
-        \item Decreasing TFP growth 
-    \end{itemize}
-    \item Fit long run trends observed in the data (qualitative).  
-\end{enumerate}
-    
-\end{frame}
 
 \section{The Model}
 
@@ -101,14 +111,16 @@ Presented by: Jose M. Quintero}
     \item Representative household preferences over consumption and leisure
     \begin{enumerate}
         \item Final good consumption
-        \item \textcolor{blue}{Bundle of LET with zero price}. CES aggregator. 
+        \item \textcolor{blue}{Bundle of LET with zero price}. Love for variety
     \end{enumerate}
+    \pause 
     \item Final good competitive market
     \begin{enumerate}
         \item Inputs from monopolist intermediates. 
         \item Growing mass of intermediate sectors. 
         \item \textcolor{blue}{Demand shift of intermediate inputs from branding}. 
     \end{enumerate}
+    \pause 
     \item Intermediate inputs with monopolistic competition. 
     \begin{enumerate}
         \item One-to-one technology using capital. 
@@ -124,10 +136,12 @@ Presented by: Jose M. Quintero}
     
 \end{frame}
 
+\subsection{Dynamic Model}
+
 \begin{frame}{Exogenous Growth}
     \begin{figure}
         \centering
-        \includegraphics[width = \textwidth]{Presentation01/Figures/Mod1.pdf}
+        \includegraphics[width = 0.7\textwidth]{Presentation01/Figures/Mod1.pdf}
         \caption{Model Overview}
     \end{figure}
 \end{frame}
@@ -153,10 +167,13 @@ Presented by: Jose M. Quintero}
     \end{itemize}
 \end{frame}
 
+\subsection{Static Model}
+
+
 \begin{frame}{Endogenous Leisure Technology}
     \begin{figure}
         \centering
-        \includegraphics[width = \textwidth]{Presentation01/Figures/Mod2.pdf}
+        \includegraphics[width = 0.7\textwidth]{Presentation01/Figures/Mod2.pdf}
         \caption{Model Overview}
     \end{figure}
 \end{frame}
@@ -166,8 +183,29 @@ Presented by: Jose M. Quintero}
 \begin{frame}{Taking the Model to the Data}
 \begin{figure}
     \centering    
-    \includegraphics[width=\textwidth]{Presentation01/Figures/ModTrends.png}
+    \includegraphics[width=0.7\textwidth]{Presentation01/Figures/ModTrends.png}
 \end{figure}  
+\end{frame}
+
+\section{Conclusions}
+
+\begin{frame}{Conclusions}
+
+\begin{itemize}
+    \item The big achievement of this paper is that distinguish between traditional products and leisure-directed products. 
+    \item The way consumers interact with leisure products brings together macroeconomic trends that were studied separately. 
+\end{itemize}    
+\pause 
+Some of my takes... 
+\begin{itemize}
+    \item It's a milestone to start differentiating consumption products and leisure products. 
+    \item There is a big gap between the model and the data. 
+    \item All the results are mechanical
+    \begin{enumerate}
+        \item Still work to do on the law of motion of $M(t)$. The economics behind are still raw. 
+        \item What about creative destruction? 
+    \end{enumerate}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
