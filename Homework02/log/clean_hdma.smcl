@@ -1,0 +1,88 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/mnt/ide0/home/jmquintero925/Applied-Macro/Homework02/log/clean_hdma.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}22 Oct 2022, 12:46:17
+{txt}
+{com}. * Import datafor 2020
+. import delimited "Data/2020_public_lar.csv", varnames(1) colrange(3:23) clear 
+{res}{text}(21 vars, 25,551,868 obs)
+
+{com}. keep derived_msa_md action_taken loan_purpose combined_loan_to_value_ratio
+{txt}
+{com}. destring combined_loan_to_value_ratio, replace force
+{txt}combined_loan_to_value_ratio: contains nonnumeric characters; {res}replaced {txt}as {res}double
+{txt}(9443134 missing values generated)
+{res}{txt}
+{com}. * Clean data 
+. keep if action_taken==1
+{txt}(11,010,566 observations deleted)
+
+{com}. gen year = 2020
+{txt}
+{com}. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+derived_ms~d {c |}{res} 14,541,302    36914.91    22891.81          0      99999
+{txt}action_taken {c |}{res} 14,541,302           1           0          1          1
+{txt}loan_purpose {c |}{res} 14,541,302     19.3977    14.66208          1         32
+{txt}combined_l~o {c |}{res} 13,145,905    75.31286    5114.228       .007   1.83e+07
+{txt}{space 8}year {c |}{res} 14,541,302        2020           0       2020       2020
+{txt}
+{com}. * Creat var for counting 
+. gen n_ref       = inlist(loan_purpose,31,32)
+{txt}
+{com}. gen n_cashRef   = loan_purpose==32      
+{txt}
+{com}. * Collapse data frame 
+. collapse (mean) loan2val_m = combined_loan_to_value_ratio ///
+>          (median)  loan2val_p50 = combined_loan_to_value_ratio ///
+>          (sum) n_ref n_cashRef, by(derived_msa_md year)
+{txt}
+{com}. * Save temp data frame
+. save Data/temp.dta, replace 
+{txt}file Data/temp.dta saved
+
+{com}. * Import datafor 2021
+. import delimited "Data/2021_public_lar.csv", varnames(1) colrange(3:23) clear
+{res}{text}(21 vars, 26,124,552 obs)
+
+{com}. keep derived_msa_md action_taken loan_purpose combined_loan_to_value_ratio
+{txt}
+{com}. destring combined_loan_to_value_ratio, replace force
+{txt}combined_loan_to_value_ratio: contains nonnumeric characters; {res}replaced {txt}as {res}double
+{txt}(9237741 missing values generated)
+{res}{txt}
+{com}. * Clean data 
+. keep if action_taken==1
+{txt}(11,127,244 observations deleted)
+
+{com}. gen year = 2021
+{txt}
+{com}. * Creat var for counting 
+. gen n_ref       = inlist(loan_purpose,31,32)
+{txt}
+{com}. gen n_cashRef   = loan_purpose==32      
+{txt}
+{com}. * Collapse data frame 
+. collapse (mean) loan2val_m = combined_loan_to_value_ratio ///
+>          (median)  loan2val_p50 = combined_loan_to_value_ratio ///
+>          (sum) n_ref n_cashRef, by(derived_msa_md year)
+{txt}
+{com}. 
+. * Append with 2020
+. append using Data/temp
+{txt}
+{com}. * Erase temp 
+. erase Data/temp.dta  
+{txt}
+{com}. log close        
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/mnt/ide0/home/jmquintero925/Applied-Macro/Homework02/log/clean_hdma.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}22 Oct 2022, 13:24:09
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

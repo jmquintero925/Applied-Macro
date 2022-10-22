@@ -1,0 +1,18 @@
+##################################################
+#Copy this file to your home directory and run it with qsub
+#"qsub stata-array.sh" will start the job
+#stata-mp is licensed for 8 cores
+#This script will start 10 stata-mp jobs each running on 8 cores
+###################################################
+
+#!/bin/bash
+#PBS -N StatmpArray
+#PBS -l nodes=1:ppn=8,mem=10gb
+#PBS -j oe
+#PBS -t 1-10
+#
+cd $PBS_O_WORKDIR
+# execute program
+# this will start 10 stata jobs 
+# loading files HelloHello-1.do, HelloWorld-2.do, HelloWorld-3.do, ...
+stata-mp -b do HelloWorld-${PBS_ARRAYID}.do
