@@ -10,8 +10,10 @@
 #Stata15 mp is licensed for 8 CPU's 
 #PBS -l nodes=1:ppn=3,mem=30gb
 #PBS -j oe
-#SBATCH --mail-type=END,FAIL
+#PBS -M jmquintero925@uchicago.edu
+#PBS -m ae
+
 #
 cd "/home/jmquintero925/Applied-Macro/Homework02/Code/"
 # execute program
-stata-mp -b do clean_hdma.do
+stata-mp -b do Master.do

@@ -1,0 +1,357 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/mnt/ide0/home/jmquintero925/Applied-Macro/Homework02/log/hw2.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}25 Oct 2022, 16:12:07
+{txt}
+{com}. * Use key for Census data
+. global censuskey 29fe8274c2595575c04b2320567ada96538b3660
+{txt}
+{com}. * Run Census Data
+. do Code/ACS.do
+{txt}
+{com}. **************************************************************
+. ***** Applied Macro: Micro data for Macro Models   ***********
+. ***** Author: Jose M. Quintero                     ***********
+. ***** TA: Olivia Bordeou                           ***********
+. **************************************************************
+. 
+. 
+. * Download data 
+. getcensus dp04_0002 dp04_0046 dp04_0091, years(2019) sample(1) geography(metro) cachepath("/home/jmquintero925/ado/plus/g/") clear
+{res}{text}(9 vars, 518 obs)
+{res}{browse "https://api.census.gov/data/2019/acs/acs1/profile?get=DP04_0002E,DP04_0002M,DP04_0046E,DP04_0046M,DP04_0091E,DP04_0091M,NAME&for=metropolitan%20statistical%20area/micropolitan%20statistical%20area:*&key=29fe8274c2595575c04b2320567ada96538b3660": Link to data for 2019}
+{p}Variables labeled using data dictionary for 2019.{p_end}
+{p}One or more variable labels were truncated. See the variable {help notes} for full descriptions.{p_end}
+{txt}
+{com}. rename dp04_0002e nHouse
+{res}{txt}
+{com}. rename dp04_0046e nHouse_ownocc
+{res}{txt}
+{com}. rename dp04_0091e nHouse_ownocc_mort
+{res}{txt}
+{com}. rename metropolitanstatisticalareamicro cbsacode
+{res}{txt}
+{com}. * Keep variables of interest
+. destring cbsacode, replace
+{txt}cbsacode: all characters numeric; {res}replaced {txt}as {res}long
+{txt}
+{com}. keep cbsacode nHouse*
+{txt}
+{com}. * Save data
+. save Data/census.dta, replace 
+{txt}file Data/census.dta saved
+
+{com}. 
+{txt}end of do-file
+
+{com}. * Run Zillow Prices
+. do Code/Zillow.do
+{txt}
+{com}. **************************************************************
+. ***** Applied Macro: Micro data for Macro Models   ***********
+. ***** Author: Jose M. Quintero                     ***********
+. ***** TA: Olivia Bordeou                           ***********
+. **************************************************************
+. 
+. * This do-file downloads the Prices from Zillow and cac=lculates the price growth 
+. * in a 5 year window for 2020 and 2021
+. 
+. * Import data from Zillow website 
+. import delimited using "https://files.zillowstatic.com/research/public_csvs/zhvi/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv", clear
+{res}{text}(278 vars, 893 obs)
+
+{com}. * Get date from label (The way I do it is not smart)  
+. forv i = 6/278 {c -(}
+{txt}  2{com}.     local newName = "zIndex"+string(2000+floor((`i'-5)/12))+"_"+string(mod(`i'-5,12))
+{txt}  3{com}.     rename v`i' `newName'
+{txt}  4{com}. {c )-}
+{res}{txt}
+{com}. * Drop aggregate data
+. drop if regiontype == "country"
+{txt}(1 observation deleted)
+
+{com}. * Reshape data
+. reshape long zIndex, i(regionid) j(date) string
+{txt}(note: j = 2000_1 2000_10 2000_11 2000_2 2000_3 2000_4 2000_5 2000_6 2000_7 2000_8 2000_9 2001_0 2001_1 2001_10 2001_11 2001_2 2001_3 2001_4 2001_5 2001_6 2001_7 2001_8 2001_9 2002_0 2002_1 2002_10 2002_11 2002_2 2002_3 2002_4 2002_5 2002_6 2002_7 2002_8 2002_9 2003_0 2003_1 2003_10 2003_11 2003_2 2003_3 2003_4 2003_5 2003_6 2003_7 2003_8 2003_9 2004_0 2004_1 2004_10 2004_11 2004_2 2004_3 2004_4 2004_5 2004_6 2004_7 2004_8 2004_9 2005_0 2005_1 2005_10 2005_11 2005_2 2005_3 2005_4 2005_5 2005_6 2005_7 2005_8 2005_9 2006_0 2006_1 2006_10 2006_11 2006_2 2006_3 2006_4 2006_5 2006_6 2006_7 2006_8 2006_9 2007_0 2007_1 2007_10 2007_11 2007_2 2007_3 2007_4 2007_5 2007_6 2007_7 2007_8 2007_9 2008_0 2008_1 2008_10 2008_11 2008_2 2008_3 2008_4 2008_5 2008_6 2008_7 2008_8 2008_9 2009_0 2009_1 2009_10 2009_11 2009_2 2009_3 2009_4 2009_5 2009_6 2009_7 2009_8 2009_9 2010_0 2010_1 2010_10 2010_11 2010_2 2010_3 2010_4 2010_5 2010_6 2010_7 2010_8 2010_9 2011_0 2011_1 2011_10 2011_11 2011_2 2011_3 2011_4 2011_5 2011_6 2011_7 2011_8 2011_9 2012_0 2012_1 2012_10 2012_11 2012_2 2012_3 2012_4 2012_5 2012_6 2012_7 2012_8 2012_9 2013_0 2013_1 2013_10 2013_11 2013_2 2013_3 2013_4 2013_5 2013_6 2013_7 2013_8 2013_9 2014_0 2014_1 2014_10 2014_11 2014_2 2014_3 2014_4 2014_5 2014_6 2014_7 2014_8 2014_9 2015_0 2015_1 2015_10 2015_11 2015_2 2015_3 2015_4 2015_5 2015_6 2015_7 2015_8 2015_9 2016_0 2016_1 2016_10 2016_11 2016_2 2016_3 2016_4 2016_5 2016_6 2016_7 2016_8 2016_9 2017_0 2017_1 2017_10 2017_11 2017_2 2017_3 2017_4 2017_5 2017_6 2017_7 2017_8 2017_9 2018_0 2018_1 2018_10 2018_11 2018_2 2018_3 2018_4 2018_5 2018_6 2018_7 2018_8 2018_9 2019_0 2019_1 2019_10 2019_11 2019_2 2019_3 2019_4 2019_5 2019_6 2019_7 2019_8 2019_9 2020_0 2020_1 2020_10 2020_11 2020_2 2020_3 2020_4 2020_5 2020_6 2020_7 2020_8 2020_9 2021_0 2021_1 2021_10 2021_11 2021_2 2021_3 2021_4 2021_5 2021_6 2021_7 2021_8 2021_9 2022_0 2022_1 2022_2 2022_3 2022_4 2022_5 2022_6 2022_7 2022_8 2022_9)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}     892   {txt}->{res}  243516
+{txt}Number of variables            {res}     278   {txt}->{res}       7
+{txt}j variable (273 values)                   ->   {res}date
+{txt}xij variables:
+{res}zIndex2000_1 zIndex2000_10 ... zIndex2022_9{txt}->  {res}zIndex
+{txt}{hline 77}
+
+{com}. * Get month and year  
+. gen year = substr(date,1,4)
+{txt}
+{com}. destring year, replace
+{txt}year: all characters numeric; {res}replaced {txt}as {res}int
+{txt}
+{com}. gen month = substr(date,6,.)
+{txt}
+{com}. destring month, replace
+{txt}month: all characters numeric; {res}replaced {txt}as {res}byte
+{txt}
+{com}. * Correct the month of december  
+. replace month = 12 if month == 0
+{txt}(19,624 real changes made)
+
+{com}. * Generate the 5 year growth 
+. sort regionid month year
+{txt}
+{com}. bys regionid month: gen zIndx_g = zIndex[_n]/zIndex[_n-5]-1
+{txt}(103,208 missing values generated)
+
+{com}. sort regionid year month
+{txt}
+{com}. order regionid year month zIndex zIndx_g
+{txt}
+{com}. * Keep only years 2020 and 2021
+. keep if year>=2020
+{txt}(213,188 observations deleted)
+
+{com}. * Save data 
+. save Data/zillow_prices.dta, replace
+{txt}file Data/zillow_prices.dta saved
+
+{com}. ********************************************************************************
+. ********************************************************************************
+. ********************************************************************************
+. * Import crosswalk 
+. import delimited using "https://query.data.world/s/lgudxfzytdainwzv4bcgo2fqypgpoq", clear
+{res}{text}(10 vars, 3,144 obs)
+
+{com}. * Keep ID variables
+. keep cbsacode metroregionid_zillow
+{txt}
+{com}. * Convert to numeric
+. destring cbsacode, replace force
+{txt}cbsacode: contains nonnumeric characters; {res}replaced {txt}as {res}long
+{txt}(1336 missing values generated)
+{res}{txt}
+{com}. destring metroregionid_zillow, replace force
+{txt}metroregionid_zillow: contains nonnumeric characters; {res}replaced {txt}as {res}long
+{txt}(1336 missing values generated)
+{res}{txt}
+{com}. * Drop if there is no code
+. drop if cbsacode==. & metroregionid_zillow==.
+{txt}(1,336 observations deleted)
+
+{com}. duplicates drop
+
+{p 0 4}{txt}Duplicates in terms of {txt} all variables{p_end}
+
+(891 observations deleted)
+
+{com}. * Save temp base 
+. rename metroregionid_zillow regionid
+{res}{txt}
+{com}. save Data/temp.dta, replace 
+{txt}(note: file Data/temp.dta not found)
+file Data/temp.dta saved
+
+{com}. ********************************************************************************
+. ********************************************************************************
+. ********************************************************************************
+. * Merge Zillo data with crosswalk codes
+. use Data/zillow_prices.dta, clear
+{txt}
+{com}. merge m:1 regionid using Data/temp.dta, keep(2 3)
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}              31
+{txt}{col 9}from master{col 30}{res}               0{txt}  (_merge==1)
+{col 9}from using{col 30}{res}              31{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}          30,124{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. * Take averages of prices growth by year
+. collapse (mean) zIndx_g, by(cbsacode year)
+{txt}
+{com}. * Save dataframe
+. save Data/zillow_prices.dta, replace
+{txt}file Data/zillow_prices.dta saved
+
+{com}. erase Data/temp.dta
+{txt}
+{com}. 
+. 
+. 
+. 
+. 
+. 
+. 
+{txt}end of do-file
+
+{com}. * Run HDMA data
+. do Code/clean_hdma.do
+{txt}
+{com}. **************************************************************
+. ***** Applied Macro: Micro data for Macro Models   ***********
+. ***** Author: Jose M. Quintero                     ***********
+. ***** TA: Olivia Bordeou                           ***********
+. **************************************************************
+. 
+. * This do-file cleans the HDMA, while pasting de CBS area codes 
+. 
+. 
+. 
+. * Download matching codes so it does not drop the main areas
+. import excel using "https://www2.census.gov/programs-surveys/metro-micro/geographies/reference-files/2020/delineation-files/list1_2020.xls", firstrow cellrange(a3:l1919) case(lower) clear
+{res}{txt}
+{com}. * Clean IDs
+. replace metropolitandivisioncode = cbsacode if missing(metropolitandivisioncode)
+{txt}(1,806 real changes made)
+
+{com}. rename metropolitandivisioncode derived_msa_md
+{res}{txt}
+{com}. * Keep IDs only 
+. keep derived_msa_md cbsacode
+{txt}
+{com}. duplicates drop
+
+{p 0 4}{txt}Duplicates in terms of {txt} all variables{p_end}
+
+(957 observations deleted)
+
+{com}. * Make numeric
+. destring cbsacode, replace
+{txt}cbsacode: all characters numeric; {res}replaced {txt}as {res}long
+{txt}
+{com}. destring derived_msa_md, replace
+{txt}derived_msa_md: all characters numeric; {res}replaced {txt}as {res}long
+{txt}
+{com}. * Save data with IDs
+. save Data/cbsa2msamd.dta, replace
+{txt}(note: file Data/cbsa2msamd.dta not found)
+file Data/cbsa2msamd.dta saved
+
+{com}. ********************************************************************************
+. ********************************************************************************
+. ********************************************************************************
+. * Import datafor 2020 (HDMA)
+. import delimited "Data/2020_public_lar.csv", varnames(1) colrange(3:23) clear 
+{res}{text}(21 vars, 25,551,868 obs)
+
+{com}. keep derived_msa_md action_taken loan_purpose combined_loan_to_value_ratio
+{txt}
+{com}. destring combined_loan_to_value_ratio, replace force
+{txt}combined_loan_to_value_ratio: contains nonnumeric characters; {res}replaced {txt}as {res}double
+{txt}(9443134 missing values generated)
+{res}{txt}
+{com}. * Clean data 
+. keep if action_taken==1
+{txt}(11,010,566 observations deleted)
+
+{com}. drop if derived_msa_md == 99999 | derived_msa_md == 0
+{txt}(1,374,422 observations deleted)
+
+{com}. gen year = 2020
+{txt}
+{com}. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+derived_ms~d {c |}{res} 13,166,880    30542.58    11326.34      10180      49740
+{txt}action_taken {c |}{res} 13,166,880           1           0          1          1
+{txt}loan_purpose {c |}{res} 13,166,880    19.63912    14.60612          1         32
+{txt}combined_l~o {c |}{res} 11,991,791    75.31856    5354.672       .007   1.83e+07
+{txt}{space 8}year {c |}{res} 13,166,880        2020           0       2020       2020
+{txt}
+{com}. * Creat var for counting 
+. gen n_ref       = inlist(loan_purpose,31,32)
+{txt}
+{com}. gen n_cashRef   = loan_purpose==32      
+{txt}
+{com}. *Merge in CBSA
+. merge m:1 derived_msa_md using Data/cbsa2msamd.dta, assert(2 3) keep(3) nogen
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}      13,166,880{txt}  
+{col 5}{hline 41}
+
+{com}. * Collapse data frame 
+. collapse (mean) loan2val_m = combined_loan_to_value_ratio ///
+>          (median)  loan2val_p50 = combined_loan_to_value_ratio ///
+>          (sum) n_ref n_cashRef, by(cbsacode year)
+{txt}
+{com}. * Save temp data frame
+. save Data/temp.dta, replace 
+{txt}(note: file Data/temp.dta not found)
+file Data/temp.dta saved
+
+{com}. ********************************************************************************
+. ********************************************************************************
+. ********************************************************************************
+. * Import datafor 2021
+. import delimited "Data/2021_public_lar.csv", varnames(1) colrange(3:23) clear
+{res}{text}(21 vars, 26,124,552 obs)
+
+{com}. keep derived_msa_md action_taken loan_purpose combined_loan_to_value_ratio
+{txt}
+{com}. destring combined_loan_to_value_ratio, replace force
+{txt}combined_loan_to_value_ratio: contains nonnumeric characters; {res}replaced {txt}as {res}double
+{txt}(9237741 missing values generated)
+{res}{txt}
+{com}. * Clean data 
+. keep if action_taken==1
+{txt}(11,127,244 observations deleted)
+
+{com}. drop if derived_msa_md == 99999 | derived_msa_md == 0
+{txt}(1,469,126 observations deleted)
+
+{com}. gen year = 2021
+{txt}
+{com}. * Creat var for counting 
+. gen n_ref       = inlist(loan_purpose,31,32)
+{txt}
+{com}. gen n_cashRef   = loan_purpose==32
+{txt}
+{com}. *Merge in CBSA
+. merge m:1 derived_msa_md using Data/cbsa2msamd.dta, assert(2 3) keep(3) nogen
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}      13,528,182{txt}  
+{col 5}{hline 41}
+
+{com}. * Collapse data frame 
+. collapse (mean) loan2val_m = combined_loan_to_value_ratio ///
+>          (median)  loan2val_p50 = combined_loan_to_value_ratio ///
+>          (sum) n_ref n_cashRef, by(cbsacode year)
+{txt}
+{com}. 
+. * Append with 2020
+. append using Data/temp
+{txt}
+{com}. * Erase temp 
+. erase Data/temp.dta  
+{txt}
+{com}. * Save data frame
+. save Data/hdma_collapsed.dta, replace    
+{txt}file Data/hdma_collapsed.dta saved
+
+{com}.          
+.          
+. 
+{txt}end of do-file
+
+{com}. *Merge data
+. do Merge_data.do
+{err}{p 0 4 2}
+file Merge_data.do
+not found
+{p_end}
+{txt}{search r(601), local:r(601);}
+
+end of do-file
+{search r(601), local:r(601);}

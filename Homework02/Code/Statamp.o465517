@@ -1,0 +1,11 @@
+
+#################
+Epilogue Job Info:
+Job ID: 465517.acropolis
+User ID: jmquintero925
+Job Name: Statamp
+Resource List: nodes=1:ppn=3,mem=30gb,neednodes=1:ppn=3
+Resources Used: cput=00:34:37,vmem=9990372kb,walltime=00:29:44,mem=5988412kb,energy_used=0
+Exit Code: 0
+#################
+
