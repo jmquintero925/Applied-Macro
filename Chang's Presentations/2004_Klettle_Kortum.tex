@@ -1,0 +1,119 @@
+\documentclass[usenames,dvipsnames,aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,xfrac,dsfont,amsfonts,bbm,cancel,euler,ulem}
+\usepackage{graphicx,xcolor,pgfplots,epstopdf,lscape,pdflscape}
+\usepackage{apacite,natbib}
+\usepackage{hyperref}
+\usepackage{caption,subcaption,booktabs,multicol,adjustbox}
+
+
+\hypersetup{
+    colorlinks,%
+    citecolor=black,%
+    filecolor=black,%
+    linkcolor=black,%
+    urlcolor=black
+}   % useful for program listings
+\usecolortheme{seahorse}
+
+\title{Innovating Firms and Aggregate Innovation  \\ \small{Applied Macroeconomics: Micro Data for Macro Models} }
+\author{Author: Tor Jakob Klette \and Samuel Kortum \\ 
+Presented by: Jose M. Quintero}
+
+
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\AtBeginSubsection[]
+{
+   \begin{frame}
+        \frametitle{Outline}
+        \tableofcontents[currentsubsection]
+   \end{frame}
+}
+
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{What's new}
+\begin{itemize}
+    \item Stylized facts: Tie together \textcolor{blue}{\textbf{firm dynamics}} and \textcolor{red}{\textbf{innovation}} Lit. 
+    \begin{enumerate}
+        \item[I1.] Productivity and \textcolor{blue}{R\&D} are positively related.  
+        \item[I2.] Patents vary proportionally to \textcolor{blue}{R\&D}. 
+        \item[F1.] The \textcolor{red}{firm size} dist is highly skewed.
+        \item[F2.] \textcolor{red}{Smaller firms} have lower prob. of survival.
+        \item[B1.] \textcolor{blue}{R\&D} intensity is independent of \textcolor{red}{firm size}. 
+        \item[B2.] Conditional on survival, \textcolor{red}{smaller firms} have higher \textcolor{blue}{growth rates}. 
+    \end{enumerate}
+    \vfill
+    \item Tractable model extending Aghion and Howitt (1992), Grossman and Helpman (1991)
+    \begin{enumerate}
+        \item \textcolor{teal}{Multiple-product} firms (own 1+ product line).
+        \item Competition between \textcolor{teal}{incumbents} and entrants. 
+    \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The not so good}
+     \begin{itemize}
+         \item Assumptions that make the model tractable:
+         \begin{enumerate}
+             \item Undirected R\&D $\Longrightarrow$ R\&D decision is 1-dimension.  
+             \item Final good tech. $\Longrightarrow$ Quality does not matter. 
+         \end{enumerate}
+         \item Zipf's law vs. Gibrat's law for firm size distribution. 
+         \item Structure of the paper. 
+         \begin{itemize}
+             \item Mapping the model to real measures should not be a discussion. 
+         \end{itemize}
+     \end{itemize}
+\end{frame}
+
+\begin{frame}{What's next?}
+    \begin{itemize}
+        \item Firm heterogeneity. 
+        \item Know how, learning by doing. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Homework}
+    \begin{itemize}
+    \vspace{15pt}
+        \item[1.] Is the firm's age a state variable for the firm? \\ 
+        \item No. The only state of the firm is the number of product lines. Recall the value function
+        \begin{equation*}
+            \rho V(n) = \max_{\lambda}\Big\{ \pi n - nc(\lambda) + \lambda\left(V(n+1)-V(n)\right) + \mu\left( V(n-1)-V(n)\right)\Big\}
+        \end{equation*}
+        \vfill
+        \item[2.] Would two firms have an incentive to combine?  Would a multiple-product firm have an incentive to divide itself? 
+        \item There are no incentives to divide because the value of a firm is linearly increasing in the number of products line. Combining is a trickier question as the ownership of the firm is not specified. But if the ownership is split proportionally to the number of product lines each firm to the table, then they should be indifferent given the linearity of the value function. 
+        \vspace{15pt}
+        \framebreak
+        
+        \item[3.] Why does both entry and incumbent innovation occur in equilibrium?  Why doesn't the equilibrium involve a corner solution with only one or the other? \\ 
+        \item This is dependent on the magnitude of the entry cost $h$. If $h$ is sufficiently high, then the innovation rate from entrants is driven down to $\eta=0$. In this particular case, $\lambda=\mu$ (innovation intensity is the same as creative destruction). The downside of this equilibrium is that there is no stationary firm size distribution. In the equilibrium where $\eta>0$, then both entrants and incumbents haven incentives to participate (the value for both is positive).
+         \vspace{40pt}
+        \framebreak
+        \item[4.] Are entry and incumbent innovation complements or substitutes?  In particular, if the cost of entry $h$ rises, what happens to $\eta$ and $\lambda$? \\ 
+        \item Substitutes. Consider the equilibrium equations that  pin down the innovation intensity and innovation by entrants:
+        \begin{align*}
+            c'(\lambda) &= F & \eta &= \frac{\Bar{\pi}-c(\lambda)}{F}-r
+        \end{align*}
+        where $F=wh$. Then upon an increase in $h$ or $F$, $\lambda$ will increase due to the convexity of $c$. This will drive down $\eta$. The first-order effect is entry becomes more expensive, but second order the incentives decrease as incumbents are innovating more and competition is tighter. 
+    \end{itemize}
+\end{frame}
+
+\end{document}
+
