@@ -1,4 +1,4 @@
-\documentclass[usenames,dvipsnames,aspectratio=32]{beamer}
+\documentclass[usenames,dvipsnames,aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usecolortheme{seahorse}
 \usepackage{amsmath,xfrac,dsfont,amsfonts,bbm,cancel,euler,ulem}
@@ -123,31 +123,108 @@
 
 \begin{frame}{Distribution of Average products}
 \begin{center}
-    \includegraphics[width=0.65\textwidth]{Figures/ReturnDistribution.png}
-\end{center}
-\end{frame}
-
-\begin{frame}{Average Product and Firm Size}
-\begin{center}
-    \includegraphics[width=0.65\textwidth]{Figures/ReturnFirmSize.png}
+    \includegraphics[width=0.55\textwidth]{Figures/ReturnDistribution.png}
 \end{center}
 \end{frame}
 
 \begin{frame}{Size-Dependent Distortions}
     \begin{enumerate}[label=\textbf{\textcolor{violet}{\arabic*.}}]
         \item Distortion in terms of employment
-        \item Distortions in terms of 
+        \begin{itemize}[label=\textcolor{violet}{$\blacktriangleright$}]
+            \item India: Firms over 100 workers have firing costs.
+        \end{itemize}
+        \vfill
+        \item Distortions in terms of revenue
+        \begin{itemize}[label=\textcolor{violet}{$\blacktriangleright$}]
+            \item Mexico: Discontinuous change in tax rates after threshold. 
+            \item Indonesia: Firms below threshold exempt from 10\% VAT.
+        \end{itemize}
     \end{enumerate}
 \end{frame}
 
 \begin{frame}{The case of Mexico}
-    \includegraphics[width=\textwidth]{Figures/MexicoSizeDependent.png}
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{Figures/MexicoSizeDependent.png}
+\end{center}
 \end{frame}
 
 \begin{frame}{The Case of India}{Informality}
+\begin{center}
     \includegraphics[width=\textwidth]{Figures/IndiaSizeDependent.png}
+\end{center}
 \end{frame}
 
+\section{Missing Middle Origin}
+
+\begin{frame}{Employment Share vs Firm Size Dist}
+\begin{itemize}[label=\textcolor{violet}{$\blacktriangleright$}]
+    \item Previous papers: Study the employment share distribution by firm size
+    \begin{equation*}
+        \text{Employment Share}(n) = \dfrac{n\times\#\text{Firms}(n)}{\text{Total Employment}}\neq  \dfrac{\#\text{Firms}(n)}{\text{Total Firms}}
+    \end{equation*}
+    \vfill
+    \pause
+    \item Ej: 100 workers, 10 Firms
+    \begin{center}
+    \small{
+        \begin{tabular}{cccc} \hline\hline
+            \# Firms & \# Workers & \% Firms & \% Workers \\ \hline
+                1 &  40 & 10\% & 40\% \\ 
+                1 &  20 & 10\% & \textcolor{red}{20\%} \\ 
+                8 &  5  & 80\% & 40\% \\ 
+                \hline\hline
+        \end{tabular}
+        }
+    \end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Taking it to the data}
+\begin{table}[h]
+    \begin{center}
+    \begin{tabular}{lccc}
+    \hline \hline
+    Firm Size (Employment) & India 2011 & Indonesia 2006 & Mexico 2008 \\
+    \hline 
+    \multicolumn{4}{l}{\textit{Panel A: Distribution of Firm Size}} \\
+    $1-9$ & $97.88$ & $96.78$ & $91.74$ \\
+    $10-49$ & $1.85$ & $2.83$ & $5.85$ \\
+    $50+$ & $0.28$ & $0.39$ & $2.41$ \\
+    & & & \\
+    \multicolumn{4}{l}{\textit{Panel B: Distribution of Employment Share by Firm Size}} \\
+    $1-9$ & $64.77$ & $53.95$ & $22.45$ \\
+    $10-49$ & $12.10$ & $12.04$ & $10.55$ \\
+    $50+$ & $23.13$ & $34.01$ & $66.99$ \\
+    \hline\hline
+    \end{tabular}
+    \end{center}
+    \footnotesize{Source: See Figure 1 for sources.}
+    \end{table}
+\end{frame}
+
+\begin{frame}{Conclusions}
+    \begin{itemize}[label=\textcolor{violet}{$\blacktriangleright$}]
+        \item There is no ``Missing'' Middle. 
+        \begin{enumerate}[label=\textbf{\textcolor{violet}{\arabic*.}}]
+            \item It arises from employment share distribution, 
+            \item Big firms are also absent \thus Very skewed f.s.d. 
+        \end{enumerate}
+        \vfill
+        \item Microdata does not favor existing theories:
+        \begin{enumerate}[label=\textbf{\textcolor{violet}{\arabic*.}}]
+            \item The simplest form of small firm constrained and dual economy are not consistent with empirics. 
+            \item Data leans towards big firms begin constrained. 
+            \item Policies targetted to favor small firms increase incentives to stay small. 
+        \end{enumerate}
+    \end{itemize} 
+\end{frame}
+
+
+\begin{frame}{Average Product and Firm Size}
+\begin{center}
+    \includegraphics[width=0.65\textwidth]{Figures/ReturnFirmSize.png}
+\end{center}
+\end{frame}
 
 \end{document}
 

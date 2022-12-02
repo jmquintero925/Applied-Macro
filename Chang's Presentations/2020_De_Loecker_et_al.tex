@@ -73,7 +73,12 @@
 
 \begin{frame}{Next Year nominees?} 
     \begin{itemize}[label=\textcolor{teal}{$\blacktriangleright$}]
-        \item 
+        \item What are the Macroeconomic implications of market concentration? 
+        \begin{enumerate}[label=\textbf{\textcolor{teal}{\arabic*.}}]
+            \item Business Dynamism: Akcigit and Ates (2022)
+            \item Inequality: Gans et. al (2019). 
+        \end{enumerate}
+        \item Who is charging higher mark-ups? 
     \end{itemize}
 \end{frame}
 
@@ -82,10 +87,20 @@ Suppose you want to aggregate up microdata to match macro aggregates.
 \begin{enumerate}[label=\textbf{\textcolor{teal}{(\arabic*)}},leftmargin=*]
     \item If you are adding up revenue/COGS across firms, should you weight by firm-level shares of aggregate revenue or firm-level shares of aggregate COGS? 
     \item If you are adding up COGS/revenue across firms, should you weight by firm-level share of aggregate revenue or firm-level shares of aggregate COGS? 
+    \vfill
+    \item[\textbf{\textcolor{teal}{(S)}}] Aggregate by the share of whatever is in the denominator. To see this let $\mu_i = \sfrac{y_i}{x_i}$ and let the share 
+    \begin{equation*}
+        s = \frac{x_i}{\sum_{i}x_i}
+    \end{equation*}
+    Then the aggregate is
+    \begin{align*}
+        \sum_{i} s_i\mu_i &= \sum_i \frac{x_iy_i}{x_i\sum_nx_n} = \frac{\sum_i y_i }{\sum_i x_i}
+    \end{align*}
 \end{enumerate}
-Note: For 1 and 2, aggregate revenue is the sum of revenue across firms, and aggregate COGS is the sum of COGS across firms.  The aggregate ``markup'' is (Aggregate Revenue)/(Aggregate COGS), and the aggregate COGS share is (Aggregate COGS)/(Aggregate Revenue). 
+\break
 \begin{enumerate}[resume*]
-    \item For counterfactuals such as eliminating markup dispersion or pushing the aggregate markup down to 1, do you want the ``aggregate markup wedge'' to match (Aggregate Revenue)/(Aggregate COGS)? 
+    \item For counterfactuals such as eliminating markup dispersion or pushing the aggregate markup down to 1, do you want the ``aggregate markup wedge'' to match (Aggregate Revenue)/(Aggregate COGS)?
+    \item[\textbf{\textcolor{teal}{(S)}}] The answer is very much dependent on the type of counterfactual it wants to be made. Eliminating dispersion is very different from pushing the aggregate markup to 1. In one case, one might want to match the aggregate wedge, whereas in the other, it might not be the case.  
 \end{enumerate}
 
 \end{frame}
